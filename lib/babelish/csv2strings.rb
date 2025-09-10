@@ -17,7 +17,9 @@ module Babelish
 
     def get_row_format(row_key, row_value, comment = nil, indentation = 0)
       entry = comment.to_s.empty? ? "" : "\n/* #{comment} */\n" 
-      entry + "\"#{row_key}\"" + " = \"#{row_value}\";\n"
+      # Replacing Android placeholders with iOS variant
+      row_value_ios = row_value.gsub '%$s', '%@'
+      entry + "\"#{row_key}\"" + " = \"#{row_value_ios}\";\n"
     end
 
     def extension
